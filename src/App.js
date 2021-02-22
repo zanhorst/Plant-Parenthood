@@ -9,6 +9,10 @@ import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
+import CreatePost from './components/CreatePost/CreatePost'
+import IndexAllPosts from './components/IndexAllPosts/IndexAllPosts'
+import IndexMyPosts from './components/IndexMyPosts/IndexMyPosts'
+import ShowPost from './components/ShowPost/ShowPost'
 
 class App extends Component {
   constructor (props) {
@@ -64,6 +68,18 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/posts' render={() => (
+            <CreatePost msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/index-all-posts' render={() => (
+            <IndexAllPosts msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/index-my-posts' render={() => (
+            <IndexMyPosts msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/posts/:id' render={() => (
+            <ShowPost msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

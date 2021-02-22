@@ -1,17 +1,17 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const createPost = (post, user) => {
+export const createPost = (user, post) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/create-post',
+    url: apiUrl + '/posts/',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     },
     data: {
       post: {
         title: post.title,
-        password: post.body
+        body: post.body
       }
     }
   })
@@ -19,10 +19,10 @@ export const createPost = (post, user) => {
 
 export const indexAllPosts = user => {
   return axios({
-    url: apiUrl + '/index-posts',
+    url: apiUrl + '/posts/',
     method: 'GET',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     },
     data: {}
   })
@@ -30,10 +30,21 @@ export const indexAllPosts = user => {
 
 export const indexMyPosts = user => {
   return axios({
-    url: apiUrl + '/index-posts',
+    url: apiUrl + '/posts-filter/',
     method: 'GET',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
+    },
+    data: {}
+  })
+}
+
+export const showPost = (user, id) => {
+  return axios({
+    url: apiUrl + '/posts/' + `${id}/`,
+    method: 'GET',
+    headers: {
+      'Authorization': `Token ${user.token}`
     },
     data: {}
   })
@@ -41,20 +52,20 @@ export const indexMyPosts = user => {
 
 export const deletePost = user => {
   return axios({
-    url: apiUrl + '/delete-post',
+    url: apiUrl + '/posts/',
     method: 'DELETE',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     }
   })
 }
 
-export const editPost = (user, post) => {
+export const updatePost = (user, post) => {
   return axios({
-    url: apiUrl + '/update-post',
+    url: apiUrl + '/update-post/',
     method: 'PATCH',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      'Authorization': `Token ${user.token}`
     },
     data: {
       post: {

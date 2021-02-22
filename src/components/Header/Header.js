@@ -6,6 +6,9 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#posts">Create Post</Nav.Link>
+    <Nav.Link href="#index-all-posts">Index All Posts</Nav.Link>
+    <Nav.Link href="#index-my-posts">Index My Posts</Nav.Link>
   </Fragment>
 )
 
@@ -25,7 +28,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      react-auth-template
+      Plant Parenthood
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
