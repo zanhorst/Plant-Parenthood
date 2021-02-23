@@ -50,9 +50,9 @@ export const showPost = (user, id) => {
   })
 }
 
-export const deletePost = user => {
+export const deletePost = (user, id) => {
   return axios({
-    url: apiUrl + '/posts/',
+    url: apiUrl + '/posts/' + `${id}`,
     method: 'DELETE',
     headers: {
       'Authorization': `Token ${user.token}`
@@ -60,17 +60,17 @@ export const deletePost = user => {
   })
 }
 
-export const updatePost = (user, post) => {
+export const updatePost = (id, user, post) => {
   return axios({
-    url: apiUrl + '/update-post/',
+    url: apiUrl + '/posts/' + `${id}/`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token ${user.token}`
     },
     data: {
       post: {
-        title: self.title,
-        body: self.body
+        title: post.title,
+        body: post.body
       }
     }
   })
