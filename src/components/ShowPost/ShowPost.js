@@ -121,8 +121,8 @@ class ShowPost extends Component {
           <h5>{post.body}</h5>
           <Button onClick={this.handleDelete}>Delete</Button>
           <Form onSubmit={this.handleSubmit}>
-            <Form.Group controlId="body">
-              <Form.Label>Post Body</Form.Label>
+            <Form.Group controlId="title">
+              <Form.Label>Post Title</Form.Label>
               <input
                 required
                 type="text"
@@ -147,7 +147,7 @@ class ShowPost extends Component {
               variant="primary"
               type="submit"
             >
-              Submit
+              Edit Post
             </Button>
           </Form>
         </Container>

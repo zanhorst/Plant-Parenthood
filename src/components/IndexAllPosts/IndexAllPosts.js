@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { indexAllPosts } from '../../api/post'
-
+import Container from 'react-bootstrap/Container'
 // class
 
 class IndexAllPosts extends Component {
@@ -29,11 +29,11 @@ class IndexAllPosts extends Component {
       postsJsx = 'No post history.'
     } else {
       postsJsx = this.state.posts.map(post => (
-        <li key={post.id}>
+        <Container style={{ border: '1px' }} key={post.id}>
           <Link to={`/posts/${post.id}`} title={post.title} body={post.body}>
-            {post.title} (ID: {post.id})
+            <br /><h2>{post.title}</h2><br />{post.body}
           </Link>
-        </li>
+        </Container>
       ))
     }
 

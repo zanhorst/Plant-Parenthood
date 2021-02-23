@@ -34,7 +34,7 @@ class CreatePost extends Component {
           message: messages.createPostSuccess,
           variant: 'success'
         }))
-        .then(() => history.push('/'))
+        .then(() => history.push('/index-my-posts'))
         .catch(error => {
           this.setState({ title: '', body: '' })
           msgAlert({

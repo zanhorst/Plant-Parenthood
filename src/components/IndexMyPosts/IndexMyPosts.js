@@ -31,9 +31,9 @@ class IndexMyPosts extends Component {
       postsJsx = 'No post history.'
     } else {
       postsJsx = this.state.posts.map(post => (
-        <Container key={post.id}>
+        <Container style={{ border: '1px' }} key={post.id}>
           <Link to={`/posts/${post.id}`} title={post.title} body={post.body}>
-            {post.title} -- {post.body} -- {post.id})
+            <br /><h2>{post.title}</h2><br />{post.body}
           </Link>
         </Container>
       ))
