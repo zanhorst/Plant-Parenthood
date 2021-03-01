@@ -15,7 +15,9 @@ class ShowPost extends Component {
 
     // initially our movie state will be null, until it is fetched from the api
     this.state = {
-      post: null,
+      post: {
+        owner: null
+      },
       deleted: false,
       updated: false
     }
@@ -23,10 +25,11 @@ class ShowPost extends Component {
 
   componentDidMount () {
     const { user, match, msgAlert } = this.props
-
     // make a request for a single movie
     showPost(user, match.params.id)
-      .then(res => this.setState({ post: res.data.post }))
+      .then(res => {
+        this.setState({ post: res.data.post })
+      })
       .then(() => msgAlert({
         heading: 'Showing Post Successfully',
         message: 'Your post is now displayed.',
@@ -41,10 +44,12 @@ class ShowPost extends Component {
       })
   }
 
-  handleChange = (event) => {
-    this.setState({
-      updated: false,
-      [event.target.name]: event.target.value
+  handleChange = event => {
+    event.persist()
+    this.setState((state) => {
+      return {
+        post: { ...state.post, [event.target.name]: event.target.value }
+      }
     })
   }
 
@@ -94,7 +99,11 @@ class ShowPost extends Component {
   }
 
   render () {
+    const { user } = this.props
     const { post, deleted, updated } = this.state
+    if (user.id !== post.owner) {
+      return <h1>You do not own this post.</h1>
+    }
     // if we don't have a post yet
     if (!post) {
     // A Spinner is just a nice loading message we get from react bootstrap
@@ -104,14 +113,13 @@ class ShowPost extends Component {
         </Spinner>
       )
     }
-
     // if the post is deleted
     if (deleted) {
       return <Redirect to="/index-my-posts" />
     }
 
     if (updated) {
-      console.log('We did it!')
+      return <Redirect to="/index-my-posts" />
     }
 
     return (
@@ -123,22 +131,22 @@ class ShowPost extends Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="title">
               <Form.Label>Post Title</Form.Label>
-              <input
+              <Form.Control
                 required
                 type="text"
                 name="title"
-                value={this.title}
+                value={post.title}
                 placeholder="Enter a title"
                 onChange={this.handleChange}
               />
             </Form.Group>
             <Form.Group controlId="body">
               <Form.Label>Post Body</Form.Label>
-              <input
+              <Form.Control
                 required
                 type="text"
                 name="body"
-                value={this.body}
+                value={post.body}
                 placeholder="Type something!"
                 onChange={this.handleChange}
               />
