@@ -15,7 +15,9 @@ class ShowPost extends Component {
 
     // initially our movie state will be null, until it is fetched from the api
     this.state = {
-      post: null,
+      post: {
+        owner: null
+      },
       deleted: false,
       updated: false
     }
@@ -23,10 +25,11 @@ class ShowPost extends Component {
 
   componentDidMount () {
     const { user, match, msgAlert } = this.props
-    console.log('page mounted')
     // make a request for a single movie
     showPost(user, match.params.id)
-      .then(res => this.setState({ post: res.data.post }))
+      .then(res => {
+        this.setState({ post: res.data.post })
+      })
       .then(() => msgAlert({
         heading: 'Showing Post Successfully',
         message: 'Your post is now displayed.',
@@ -96,7 +99,11 @@ class ShowPost extends Component {
   }
 
   render () {
+    const { user } = this.props
     const { post, deleted, updated } = this.state
+    if (user.id !== post.owner) {
+      return <h1>You do not own this post.</h1>
+    }
     // if we don't have a post yet
     if (!post) {
     // A Spinner is just a nice loading message we get from react bootstrap
@@ -106,7 +113,6 @@ class ShowPost extends Component {
         </Spinner>
       )
     }
-
     // if the post is deleted
     if (deleted) {
       return <Redirect to="/index-my-posts" />
