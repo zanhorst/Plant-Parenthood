@@ -23,7 +23,7 @@ class ShowPost extends Component {
 
   componentDidMount () {
     const { user, match, msgAlert } = this.props
-
+    console.log('page mounted')
     // make a request for a single movie
     showPost(user, match.params.id)
       .then(res => this.setState({ post: res.data.post }))
@@ -41,10 +41,12 @@ class ShowPost extends Component {
       })
   }
 
-  handleChange = (event) => {
-    this.setState({
-      updated: false,
-      [event.target.name]: event.target.value
+  handleChange = event => {
+    event.persist()
+    this.setState((state) => {
+      return {
+        post: { ...state.post, [event.target.name]: event.target.value }
+      }
     })
   }
 
@@ -111,7 +113,7 @@ class ShowPost extends Component {
     }
 
     if (updated) {
-      console.log('We did it!')
+      return <Redirect to="/index-my-posts" />
     }
 
     return (
@@ -123,22 +125,22 @@ class ShowPost extends Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="title">
               <Form.Label>Post Title</Form.Label>
-              <input
+              <Form.Control
                 required
                 type="text"
                 name="title"
-                value={this.title}
+                value={post.title}
                 placeholder="Enter a title"
                 onChange={this.handleChange}
               />
             </Form.Group>
             <Form.Group controlId="body">
               <Form.Label>Post Body</Form.Label>
-              <input
+              <Form.Control
                 required
                 type="text"
                 name="body"
-                value={this.body}
+                value={post.body}
                 placeholder="Type something!"
                 onChange={this.handleChange}
               />
