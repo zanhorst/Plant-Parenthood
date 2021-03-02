@@ -2,7 +2,7 @@
 
 ### [API](https://github.com/zanhorst/Plant-Parenthood-API)
 
-### [Deployed API](https://dashboard.heroku.com/apps/plant-parenthood2021)
+### [Deployed API](https://plant-parenthood2021.herokuapp.com/)
 
 # Unsolved Bugs and Problems
 
