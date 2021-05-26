@@ -1,6 +1,6 @@
 ### [Deployed Client](https://zanhorst.github.io/plant-parenthood/#/)
 
-### [API](https://github.com/zanhorst/Plant-Parenthood-API)
+### [API Repo](https://github.com/zanhorst/Plant-Parenthood-API)
 
 ### [Deployed API](https://plant-parenthood2021.herokuapp.com/)
 
